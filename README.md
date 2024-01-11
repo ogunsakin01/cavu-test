@@ -76,5 +76,17 @@ valet link
 ```
 or if you wish to test locally  with SSL, run the command below to have it available  at [https://cavu.test](https://cavu.test)
 
+## Running Tests
+To run the tests for the application, you can use either of the following commands
+```shell
+php artisan test
+```
+or use 
+```shell
+vendon/bin/phpunit
+```
+
+Make sure to run these commands from the root folder of the application. The tests will help ensure that the application functions as expected and that any changes made in the future do not introduce regressions.
+
 ## API Documentation
 The API documentation can be found at []()
