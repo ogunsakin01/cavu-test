@@ -37,8 +37,6 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-- Run `php artisan optimize:clear`
-
 #### 6. Update the database connection settings in the .env file according to your database setup
 ```dotenv
 DB_CONNECTION=****
