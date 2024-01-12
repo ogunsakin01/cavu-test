@@ -19,7 +19,7 @@ Route::post('/test', function (){
 });
 Route::prefix('v1')->group(function(){
     Route::post('/register', [AuthController::class, 'register']);
-//    Route::post('/login', '');
+    Route::post('/login', [AuthController::class, 'login']);
     Route::middleware('auth:sanctum')->group(function(){
         Route::get('/user', function (Request $request) {return $request->user();});
     });

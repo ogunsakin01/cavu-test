@@ -61,4 +61,37 @@ class AuthenticationTest extends TestCase
         $response->assertStatus(422);
         $response->assertJsonFragment([0 => 'The password field confirmation does not match.']);
     }
+
+    /**
+     *  Login validation error test
+     */
+    public function test_customer_login_validation_error(): void
+    {
+        $this->fakeUser['password'] = uniqid();
+        $response = $this->post('/api/v1/login',  [
+            'email' => $this->fakeUser['email'],
+            'password' => uniqid()
+        ],[
+            'Accept' => 'application/json'
+        ]);
+        $response->assertStatus(422);
+        $response->assertJsonFragment([0 => 'Invalid password']);
+    }
+
+
+    /**
+     *  Login success test
+     */
+    public function test_customer_login_success(): void
+    {
+        $this->fakeUser['password'] = uniqid();
+        $response = $this->post('/api/v1/login', [
+            'email' => $this->fakeUser['email'],
+            'password' => 'password'
+        ], [
+            'Accept' => 'application/json'
+        ]);
+        $response->assertStatus(200);
+        $response->assertJsonFragment(['data' => 'The password field confirmation does not match.']);
+    }
 }
