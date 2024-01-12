@@ -73,7 +73,9 @@ or if you choose to use Laravel Valet, run the command below to have it availabl
 valet link
 ```
 or if you wish to test locally  with SSL, run the command below to have it available  at [https://cavu.test](https://cavu.test)
-
+```shell
+valet secure
+```
 ## Running Tests
 To run the tests for the application, you can use either of the following commands
 ```shell
@@ -87,4 +89,4 @@ vendon/bin/phpunit
 Make sure to run these commands from the root folder of the application. The tests will help ensure that the application functions as expected and that any changes made in the future do not introduce regressions.
 
 ## API Documentation
-The API documentation can be found at []()
+The API documentation can be found at [https://documenter.getpostman.com/view/3172372/2s9YsNcUxg](https://documenter.getpostman.com/view/3172372/2s9YsNcUxg)

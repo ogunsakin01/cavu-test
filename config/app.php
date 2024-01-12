@@ -185,4 +185,6 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+    'parking_space' => env('AVAILABLE_PARKING_SPACE', 10)
+
 ];
