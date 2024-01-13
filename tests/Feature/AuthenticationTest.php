@@ -75,7 +75,6 @@ class AuthenticationTest extends TestCase
      */
     public function test_customer_login_validation_error(): void
     {
-
         $response = $this->post('/api/v1/login',  [
             'email' => $this->testUser['email'],
             'password' => uniqid()
@@ -100,5 +99,19 @@ class AuthenticationTest extends TestCase
         ]);
         $response->assertStatus(200);
         $response->assertJsonFragment(['message' => 'Login successful']);
+    }
+
+    public function test_authenticated_customer_can_fetch_auth_record(){
+        $token = $this->testUser->createToken('TestToken')->plainTextToken;
+        $response = $this->get('/api/v1/user', [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '. $token
+        ]);
+        $response->assertStatus(200);
+        $response->assertJsonFragment([
+            'email' => $this->testUser['email'],
+            'name' => $this->testUser['name']
+        ]);
+
     }
 }
