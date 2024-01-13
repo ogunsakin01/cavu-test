@@ -11,6 +11,8 @@ class AuthenticationTest extends TestCase
 {
     public array $fakeUser;
 
+    public $testUser;
+
     public function __construct(string $name)
     {
         parent::__construct($name);
@@ -20,6 +22,12 @@ class AuthenticationTest extends TestCase
             'password' => 'password',
             'password_confirmation' => 'password'
         ];
+
+        $this->testUser = User::create([
+            'name' => fake()->name(),
+            'email' => fake()->safeEmail(),
+            'password' => Hash::make('password')
+        ]);
     }
 
     /**
@@ -67,9 +75,9 @@ class AuthenticationTest extends TestCase
      */
     public function test_customer_login_validation_error(): void
     {
-        $this->fakeUser['password'] = uniqid();
+
         $response = $this->post('/api/v1/login',  [
-            'email' => $this->fakeUser['email'],
+            'email' => $this->testUser['email'],
             'password' => uniqid()
         ],[
             'Accept' => 'application/json'
@@ -84,14 +92,13 @@ class AuthenticationTest extends TestCase
      */
     public function test_customer_login_success(): void
     {
-        $this->fakeUser['password'] = uniqid();
         $response = $this->post('/api/v1/login', [
-            'email' => $this->fakeUser['email'],
+            'email' => $this->testUser['email'],
             'password' => 'password'
         ], [
             'Accept' => 'application/json'
         ]);
         $response->assertStatus(200);
-        $response->assertJsonFragment(['data' => 'The password field confirmation does not match.']);
+        $response->assertJsonFragment(['message' => 'Login successful']);
     }
 }
