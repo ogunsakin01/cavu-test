@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AvailabilityController;
+use App\Http\Controllers\BookingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +25,16 @@ Route::prefix('v1')->group(function(){
     Route::post('/login', [AuthController::class, 'login']);
     Route::middleware('auth:sanctum')->group(function(){
         Route::get('/user', function (Request $request) {return $request->user();});
+        Route::prefix('availability')->group(function(){
+            Route::get('/', [AvailabilityController::class, 'availability']);
+            Route::post('/', [AvailabilityController::class, 'checkAvailability']);
+            Route::post('/pricing', [AvailabilityController::class, 'availabilityPricing']);
+        });
+        Route::prefix('booking')->group(function(){
+            Route::post('/}', [BookingController::class, 'createBooking']);
+            Route::patch('/{bookingId}', [BookingController::class, 'updateBooking']);
+            Route::delete('/{bookingId}', [BookingController::class, 'deleteBooking']);
+        });
     });
 });
 

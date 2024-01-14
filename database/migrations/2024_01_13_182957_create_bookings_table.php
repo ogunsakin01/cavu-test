@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->dateTime('start');
             $table->dateTime('end');
+            $table->enum('parking_space', config('app.parking_spaces'));
             $table->timestamps();
         });
     }

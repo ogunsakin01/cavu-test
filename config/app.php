@@ -185,6 +185,13 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
-    'parking_space' => env('AVAILABLE_PARKING_SPACE', 10)
+    'prices' => [
+        'autumn' => env('AUTUMN_PRICE', 40),
+        'winter' => env('WINTER_PRICE', 50),
+        'spring' => env('SPRING_PRICE', 30),
+        'summer' => env('SUMMER_PRICE', 20)
+    ],
+
+    'parking_spaces' => ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
 
 ];

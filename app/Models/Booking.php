@@ -9,5 +9,5 @@ class Booking extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['start', 'end'];
+    protected $guarded = [];
 }
