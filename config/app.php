@@ -186,10 +186,22 @@ return [
     ])->toArray(),
 
     'prices' => [
-        'autumn' => env('AUTUMN_PRICE', 40),
-        'winter' => env('WINTER_PRICE', 50),
-        'spring' => env('SPRING_PRICE', 30),
-        'summer' => env('SUMMER_PRICE', 20)
+        'autumn' => [
+            'weekend' => env('AUTUMN_WEEKEND_PRICE'),
+            'weekday' => env('AUTUMN_WEEKDAY_PRICE'),
+        ],
+        'winter' => [
+            'weekend' => env('WINTER_WEEKEND_PRICE'),
+            'weekday' => env('WINTER_WEEKDAY_PRICE'),
+            ],
+        'spring' => [
+            'weekend' => env('SPRING_WEEKEND_PRICE'),
+            'weekday' => env('SPRING_WEEKDAY_PRICE'),
+        ],
+        'summer' => [
+            'weekend' => env('SUMMER_WEEKEND_PRICE'),
+            'weekday' => env('SUMMER_WEEKDAY_PRICE'),
+        ]
     ],
 
     'parking_spaces' => ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
