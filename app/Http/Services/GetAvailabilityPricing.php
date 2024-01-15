@@ -70,9 +70,8 @@ class GetAvailabilityPricing
     }
 
     public function getDateRangePrice(){
-        if($this->start == $this->end){
-            $period = [$this->start];
-        }else{
+        if($this->start == $this->end) $period = [$this->start];
+        else{
             $period = new DatePeriod(
                 new DateTime($this->start),
                 new DateInterval('P1D'),
