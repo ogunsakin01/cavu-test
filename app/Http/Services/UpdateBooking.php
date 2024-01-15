@@ -3,9 +3,8 @@
 namespace App\Http\Services;
 
 use App\Http\Helpers\AvailabilityHelper;
-use App\Models\Booking;
 
-class CreateBooking
+class UpdateBooking
 {
     use AvailabilityHelper;
 
@@ -13,23 +12,25 @@ class CreateBooking
     public string $end;
     public $booking;
 
-    public function __construct($start, $end, $parkingSpace = null){
+    public function __construct($start, $end, $booking, $parkingSpace = null)
+    {
         $this->start = $start;
         $this->end = $end;
         $this->parkingSpace = $parkingSpace;
+        $this->booking = $booking;
     }
 
     public function handle(): array
     {
-        try{
+        try {
             $this->checkAvailability();
-            $this->makeBooking();
+            $this->updateBooking();
             return [
-                'message' => 'Booking created  successfully',
+                'message' => 'Booking Updated successfully',
                 'code' => 200,
-                'data' => $this->booking->toArray(),
+                'data' => $this->booking->refresh()->toArray(),
             ];
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return [
                 'message' => $e->getMessage(),
                 'code' => in_array($e->getCode(), [500, 422]) ? $e->getCode() : 400,
@@ -38,13 +39,13 @@ class CreateBooking
         }
     }
 
-    private function makeBooking(): void
+    private function updateBooking(): void
     {
-        $this->booking = Booking::create([
-            'user_id' => Auth()->id(),
-            'start' => $this->start,
-            'end' => $this->end,
-            'parking_space' => $this->parkingSpace
-        ]);
+        $this->booking->update([
+                'start' => $this->start,
+                'end' => $this->end,
+                'parking_space' => $this->parkingSpace
+            ]);
+        $this->booking['user'] = $this->booking->user;
     }
 }

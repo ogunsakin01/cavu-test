@@ -2,6 +2,7 @@
 
 namespace App\Http\Helpers;
 
+use App\Http\Services\CheckAvailability;
 use App\Models\Booking;
 
 trait AvailabilityHelper
@@ -9,6 +10,10 @@ trait AvailabilityHelper
     public array $freePeriods = [];
 
     public array $parkingSpaceBookingsFreePeriods = [];
+
+    public $availability;
+
+    public $parkingSpace;
 
     public function getParkingSpaceFreePeriods(): void
     {
@@ -87,5 +92,16 @@ trait AvailabilityHelper
             'start' => date('Y-m-d', strtotime('+1 year', strtotime(date('Y-01-01', strtotime($lastBookingEndDate))))),
             'end' => date('Y-m-d', strtotime('+1 year', strtotime(date('Y-12-31', strtotime($lastBookingEndDate))))),
         ];
+    }
+
+    private function checkAvailability(): void
+    {
+        $this->availability = (new CheckAvailability($this->start, $this->end))->handle();
+        if ($this->availability['data']['total_available_spaces'] < 1) abort(422, 'No parking space available for this dates');
+        if (is_null($this->parkingSpace)) {
+            $availableSpaces = $this->availability['data']['available_parking_space'];
+            $originalString = $availableSpaces[array_rand($availableSpaces)];
+            $this->parkingSpace = str_replace('Parking Space ', '', $originalString);
+        }
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateBookingRequest extends FormRequest
+class BookingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,9 @@ class CreateBookingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'start' => ['required', 'date', 'after:yesterday', 'before:end', 'date_format:Y-m-d'],
-            'end' => ['required', 'date', 'after:start', 'date_format:Y-m-d'],
-            'parking_space' => ['required', 'string', 'in:'.implode(',', config('app.parking_spaces'))]
+            'start' => ['required', 'date', 'after:yesterday', 'before_or_equal:end', 'date_format:Y-m-d'],
+            'end' => ['required', 'date', 'after:yesterday', 'after_or_equal:start', 'date_format:Y-m-d'],
+            'parking_space' => ['optional', 'string', 'in:'.implode(',', config('app.parking_spaces'))]
         ];
     }
 }

@@ -38,9 +38,7 @@ class CheckAvailability
             return [
                 'message' => $e->getMessage(),
                 'code' => in_array($e->getCode(), [500, 422]) ? $e->getCode() : 400,
-                'data' => [
-                    'errors' => $e->getTrace()
-                ]
+                'data' => ['errors' => ($e->getCode() == 500) ? $e->getTrace() : []]
             ];
         }
     }

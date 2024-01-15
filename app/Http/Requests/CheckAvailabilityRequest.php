@@ -22,8 +22,8 @@ class CheckAvailabilityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'start' => ['required', 'date', 'after:yesterday', 'date_format:Y-m-d'],
-            'end' => ['required', 'date', 'after:yesterday', 'date_format:Y-m-d']
+            'start' => ['required', 'date', 'after:yesterday', 'before_or_equal:end', 'date_format:Y-m-d'],
+            'end' => ['required', 'date', 'after:yesterday', 'after_or_equal:start', 'date_format:Y-m-d']
         ];
     }
 }

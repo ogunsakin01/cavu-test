@@ -31,9 +31,11 @@ Route::prefix('v1')->group(function(){
             Route::post('/pricing', [AvailabilityController::class, 'availabilityPricing']);
         });
         Route::prefix('booking')->group(function(){
-            Route::post('/}', [BookingController::class, 'createBooking']);
-            Route::patch('/{bookingId}', [BookingController::class, 'updateBooking']);
-            Route::delete('/{bookingId}', [BookingController::class, 'deleteBooking']);
+            Route::get('/', [BookingController::class, 'getBookings']);
+            Route::get('/{booking}', [BookingController::class, 'getBooking']);
+            Route::post('/', [BookingController::class, 'createBooking']);
+            Route::patch('/{booking}', [BookingController::class, 'updateBooking']);
+            Route::delete('/{booking}', [BookingController::class, 'deleteBooking']);
         });
     });
 });

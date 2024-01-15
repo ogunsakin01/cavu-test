@@ -11,6 +11,6 @@ trait ResponseHelper
         return response()->json([
             'message' => $response['message'],
             'data' => $response['data']
-        ], $response['code']);
+        ], $response['code'] ?? 200);
     }
 }
