@@ -65,7 +65,7 @@ php artisan serve
 ```
 or you can directly use PHP built-in server
 ```shell
-php -S locahost:8000 -t public/
+php -S localhost:8000 -t public/
 ```
 
 or if you choose to use Laravel Valet, run the command below to have it available at [http://cavu.test](http://cavu.test)
