@@ -5,7 +5,7 @@
 ### Prerequisites
 Make sure you have the following installed on your system before proceeding with the installation:
 
-- PHP ^8.0
+- PHP ^8.1
 - Composer
 - Laravel 10
 - Laravel Valet (optional, for local development with Valet)
@@ -65,7 +65,7 @@ php artisan serve
 ```
 or you can directly use PHP built-in server
 ```shell
-php -S locahost:8000 -t public/
+php -S localhost:8000 -t public/
 ```
 
 or if you choose to use Laravel Valet, run the command below to have it available at [http://cavu.test](http://cavu.test)
