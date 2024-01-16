@@ -5,7 +5,7 @@
 ### Prerequisites
 Make sure you have the following installed on your system before proceeding with the installation:
 
-- PHP ^8.0
+- PHP ^8.1
 - Composer
 - Laravel 10
 - Laravel Valet (optional, for local development with Valet)
