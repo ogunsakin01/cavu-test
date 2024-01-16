@@ -67,16 +67,18 @@ trait AvailabilityHelper
 
     private function buildFreePeriodsBeforeBooking($startDate, $lastEndDate): void
     {
-        $start = date('Y-m-d', strtotime("+1 day", $lastEndDate));
-        $end = date('Y-m-d', strtotime("-1 day", $startDate));
-        $this->parkingSpaceBookingsFreePeriods[] = ['start' => $start, 'end' => $end];
+        $start = strtotime("+1 day", $lastEndDate);
+        $end = strtotime("-1 day", $startDate);
+        if($start > $end) return;
+        $this->parkingSpaceBookingsFreePeriods[] = ['start' => date('Y-m-d', $start), 'end' => date('Y-m-d', $end)];
     }
 
     private function buildFreePeriodsAfterBooking($endDate, $nextStartDate): void
     {
-        $start = date('Y-m-d', strtotime("+1 day", $endDate));
-        $end = date('Y-m-d', strtotime("-1 day", $nextStartDate));
-        $this->parkingSpaceBookingsFreePeriods[] = ['start' => $start, 'end' => $end];
+        $start = strtotime("+1 day", $endDate);
+        $end = strtotime("-1 day", $nextStartDate);
+        if($start > $end) return;
+        $this->parkingSpaceBookingsFreePeriods[] = ['start' => date('Y-m-d', $start), 'end' => date('Y-m-d', $end)];
     }
 
     private function buildLastBookingDateToEndingOfYearFreePeriods($endDate): void

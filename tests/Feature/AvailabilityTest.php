@@ -130,6 +130,7 @@ class AvailabilityTest extends TestCase
             ['start' => '2024-05-15', 'end' => '2024-12-31'],
             ['start' => '2025-01-01', 'end' => '2025-12-31']
         ]]);
+
     }
 
     public function test_can_get_availability_of_parking_spaces_when_with_four_bookings()
