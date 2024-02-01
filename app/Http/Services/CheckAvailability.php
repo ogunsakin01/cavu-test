@@ -43,7 +43,8 @@ class CheckAvailability
         }
     }
 
-    private function getAvailableParkingSpaces(){
+    private function getAvailableParkingSpaces(): void
+    {
         foreach($this->freePeriods as $parkingSpace => $availabilities){
             if($this->isDateRangeAvailable($availabilities)){
                 $this->availableParkingSpaces[] = $parkingSpace;
@@ -51,7 +52,7 @@ class CheckAvailability
         }
     }
 
-    private function isDateRangeAvailable($availabilityDates)
+    private function isDateRangeAvailable($availabilityDates): bool
     {
         $inputStart = new DateTime($this->start);
         $inputEnd = new DateTime($this->end);

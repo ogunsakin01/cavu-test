@@ -37,12 +37,14 @@ class BookingController extends Controller
         ]);
     }
 
-    public function updateBooking(Booking $booking, BookingRequest $request){
+    public function updateBooking(Booking $booking, BookingRequest $request): JsonResponse
+    {
         $response = (new UpdateBooking($request->start, $request->end, $booking, $request->parking_space))->handle();
         return $this->formattedResponse($response);
     }
 
-    public function deleteBooking(Booking $booking){
+    public function deleteBooking(Booking $booking): JsonResponse
+    {
         $booking->delete();
         return $this->formattedResponse([
             'data' => [],

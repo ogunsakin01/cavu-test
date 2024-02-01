@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\Http\Helpers\AvailabilityHelper;
+use App\Models\Booking;
 
 class UpdateBooking
 {
@@ -10,9 +11,9 @@ class UpdateBooking
 
     public string $start;
     public string $end;
-    public $booking;
+    public Booking $booking;
 
-    public function __construct($start, $end, $booking, $parkingSpace = null)
+    public function __construct(string $start, string $end, Booking $booking, ?string $parkingSpace = null)
     {
         $this->start = $start;
         $this->end = $end;
